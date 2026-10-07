@@ -9,6 +9,7 @@ import {
   type Venue,
   type VenueCategory,
 } from "./data";
+import { onPhotoError, photoUrl, publicAsset } from "./photo";
 
 type DialogMode = "detail" | "reservation" | "catering" | "loyalty" | "contacts" | null;
 type Route = "home" | "about";
@@ -95,7 +96,24 @@ function LoyaltyCardVisual() {
   );
 }
 
+/** Loyalty card: prefer the real brand photo, fall back to the drawn SVG. */
+function LoyaltyCard() {
+  const [photoMissing, setPhotoMissing] = useState(false);
+  if (photoMissing) return <LoyaltyCardVisual />;
+  return (
+    <div className="loyalty-card-visual loyalty-card-visual-photo">
+      <img
+        className="loyalty-card-photo"
+        src={photoUrl("loyalty-card.jpg")}
+        alt="Карта лояльности УралРесторан Групп"
+        onError={() => setPhotoMissing(true)}
+      />
+    </div>
+  );
+}
+
 function BrandLockup({ footer = false, onHome }: { footer?: boolean; onHome: () => void }) {
+  const [logoMissing, setLogoMissing] = useState(false);
   return (
     <button
       className={`brand-lockup${footer ? " brand-lockup-footer" : ""}`}
@@ -103,11 +121,22 @@ function BrandLockup({ footer = false, onHome }: { footer?: boolean; onHome: () 
       onClick={onHome}
       aria-label="УралРесторан Групп — на главную"
     >
-      <BrandMark />
-      <span className="brand-wordmark">
-        <span>УРАЛРЕСТОРАН</span>
-        <span>ГРУПП</span>
-      </span>
+      {logoMissing ? (
+        <>
+          <BrandMark />
+          <span className="brand-wordmark">
+            <span>УРАЛРЕСТОРАН</span>
+            <span>ГРУПП</span>
+          </span>
+        </>
+      ) : (
+        <img
+          className="brand-logo"
+          src={publicAsset("logo.png")}
+          alt="УралРесторан Групп"
+          onError={() => setLogoMissing(true)}
+        />
+      )}
     </button>
   );
 }
@@ -167,16 +196,14 @@ function PhoneIcon() {
  * one image works on desktop and mobile, nothing separate is needed.
  */
 const heroCreative = {
-  image:
-    "public\El_Primo_AD.png",
-  alt: "Вечерняя сервировка столов в ресторане",
+  image: photoUrl("hero.webp"),
+  alt: "Лучшие бургеры — El Primo steak house",
   badge: "Реклама",
   href: "#restaurants",
 };
 
 const aboutCreative = {
-  image:
-    "public\El_Primo_AD.png",
+  image: photoUrl("about-hero.jpg"),
   alt: "Уютный зал ресторана холдинга",
 };
 
@@ -198,6 +225,7 @@ function HeroMedia({
       className="hero-photo"
       src={image}
       alt={alt}
+      onError={onPhotoError}
       {...(priority ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
     />
   );
@@ -386,7 +414,7 @@ function VenueModal({
     <div className="venue-modal">
       <div className="venue-gallery">
         <div className="venue-photo-stage">
-          <img src={activePhoto} alt={`${venue.name} — фото ${photoIndex + 1}`} />
+          <img src={activePhoto} alt={`${venue.name} — фото ${photoIndex + 1}`} onError={onPhotoError} />
           <span className="venue-photo-count">
             {String(photoIndex + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
           </span>
@@ -401,7 +429,7 @@ function VenueModal({
                 aria-label={`Показать фото ${index + 1}`}
                 onClick={() => setPhotoIndex(index)}
               >
-                <img src={photo} alt="" />
+                <img src={photo} alt="" onError={onPhotoError} />
               </button>
             ))}
           </div>
@@ -496,7 +524,7 @@ function CateringModal({
   return (
     <div className="story-modal">
       <div className="story-hero">
-        <img src={cateringContent.image} alt="Сервировка кейтеринга" />
+        <img src={cateringContent.image} alt="Сервировка кейтеринга" onError={onPhotoError} />
         <div className="story-hero-copy">
           <p className="eyebrow">{cateringContent.since}</p>
           <h2 id="dialog-title">{cateringContent.title}</h2>
@@ -524,7 +552,7 @@ function CateringModal({
 
         <div className="story-photos">
           {cateringContent.gallery.map((photo, index) => (
-            <img key={photo} src={photo} alt={`Кейтеринг, фото ${index + 1}`} />
+            <img key={photo} src={photo} alt={`Кейтеринг, фото ${index + 1}`} onError={onPhotoError} />
           ))}
         </div>
 
@@ -651,7 +679,7 @@ function LoyaltyModal({
         <p className="story-lead">{loyaltyContent.lead}</p>
 
         <div className="loyalty-pass">
-          <LoyaltyCardVisual />
+          <LoyaltyCard />
           <p>Чем больше вечеров с нами — тем теплее возвращение.</p>
         </div>
 
@@ -1006,7 +1034,7 @@ export default function App() {
                       onClick={() => openVenue(venue)}
                     >
                       <span className="restaurant-card-media">
-                        <img src={venue.image} alt="" loading="lazy" />
+                        <img src={venue.image} alt="" loading="lazy" onError={onPhotoError} />
                       </span>
                       <span className="restaurant-card-body">
                         <span className="restaurant-card-meta">{categoryName(venue.category)}</span>
@@ -1024,7 +1052,7 @@ export default function App() {
               </section>
 
               <section className="block block-catering reveal" id="catering">
-                <img className="block-photo" src={cateringContent.image} alt="Сервировка кейтеринга УралРесторан" />
+                <img className="block-photo" src={cateringContent.image} alt="Сервировка кейтеринга УралРесторан" onError={onPhotoError} />
                 <div className="block-shade" />
                 <div className="block-content block-content-light">
                   <p className="eyebrow block-eyebrow">Кейтеринг · URALRESTAURANT TEAM</p>
@@ -1056,7 +1084,7 @@ export default function App() {
                   </button>
                 </div>
                 <div className="block-visual">
-                  <LoyaltyCardVisual />
+                  <LoyaltyCard />
                 </div>
               </section>
 
@@ -1182,7 +1210,7 @@ export default function App() {
                   </div>
                 </div>
                 <div className="block-visual about-intro-visual">
-                  <img src={aboutIntro.image} alt="Гости за столом в ресторане" loading="lazy" />
+                  <img src={aboutIntro.image} alt="Гости за столом в ресторане" loading="lazy" onError={onPhotoError} />
                 </div>
               </section>
 
@@ -1212,7 +1240,7 @@ export default function App() {
                           aria-label={`Подробнее: ${event.title}`}
                         >
                           <span className="timeline-photo">
-                            <img src={event.image} alt="" loading="lazy" />
+                            <img src={event.image} alt="" loading="lazy" onError={onPhotoError} />
                           </span>
                           <span className="timeline-copy">
                             <span className="timeline-tag">{event.tag}</span>
@@ -1228,7 +1256,7 @@ export default function App() {
                       ) : (
                         <div className="timeline-card">
                           <span className="timeline-photo">
-                            <img src={event.image} alt="" loading="lazy" />
+                            <img src={event.image} alt="" loading="lazy" onError={onPhotoError} />
                           </span>
                           <span className="timeline-copy">
                             <span className="timeline-tag">{event.tag}</span>
@@ -1279,7 +1307,7 @@ export default function App() {
                   onClick={() => openDialog("catering")}
                   aria-label="Подробнее о кейтеринге"
                 >
-                  <img src={cateringContent.image} alt="" loading="lazy" />
+                  <img src={cateringContent.image} alt="" loading="lazy" onError={onPhotoError} />
                   <span className="cta-shade" />
                   <span className="cta-copy">
                     <span className="eyebrow">Кейтеринг · с 2019</span>
@@ -1326,7 +1354,7 @@ export default function App() {
                       aria-label={`Подробнее о заведении ${venue.name}`}
                     >
                       <span className="venue-chip-photo">
-                        <img src={venue.image} alt="" loading="lazy" />
+                        <img src={venue.image} alt="" loading="lazy" onError={onPhotoError} />
                       </span>
                       <span className="venue-chip-copy">
                         <span className="venue-chip-name">{venue.name}</span>

@@ -1,3 +1,5 @@
+import { photoUrl } from "./photo";
+
 export type VenueCategory = "restaurant" | "coffee" | "bar";
 
 export type Branch = {
@@ -23,8 +25,6 @@ export type Venue = {
   branches?: Branch[];
 };
 
-const img = (id: number, w = 1600, h = 1100) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=${w}&h=${h}`;
 
 export const venues: Venue[] = [
   {
@@ -32,8 +32,8 @@ export const venues: Venue[] = [
     name: "Диканька",
     category: "restaurant",
     cuisine: "Русская народная · деревенская",
-    image: img(29109688),
-    gallery: [img(29109688), img(8202730), img(38468624, 1600, 1100)],
+    image: photoUrl("dikanka-1.jpg"),
+    gallery: [photoUrl("dikanka-1.jpg"), photoUrl("dikanka-2.jpg"), photoUrl("dikanka-3.jpg")],
     address: "ул. Горького, 1",
     phone: "+7 3519 23-08-08",
     hours: "Пн–Сб 12:00–00:00 · Вс 12:00–23:00",
@@ -48,8 +48,8 @@ export const venues: Venue[] = [
     name: "El Primo",
     category: "restaurant",
     cuisine: "Латиноамериканская кухня · гриль",
-    image: img(10692502),
-    gallery: [img(10692502), img(36683019), img(26150616)],
+    image: photoUrl("el-primo-1.webp"),
+    gallery: [photoUrl("el-primo-1.webp"), photoUrl("el-primo-2.jpg"), photoUrl("el-primo-3.jpg")],
     address: "пр. Металлургов, 7",
     phone: "+7 3519 22-43-23",
     hours: "Ежедневно 12:00–00:00",
@@ -64,8 +64,8 @@ export const venues: Venue[] = [
     name: "Тандыр-Паша",
     category: "restaurant",
     cuisine: "Восточная кухня · хинкальная",
-    image: img(17478663),
-    gallery: [img(17478663), img(34674055), img(9829630)],
+    image: photoUrl("tandyr-1.webp"),
+    gallery: [photoUrl("tandyr-1.webp"), photoUrl("tandyr-2.jpg"), photoUrl("tandyr-3.jpg")],
     address: "ул. Советская, 162",
     phone: "+7 3519 42-42-02",
     hours: "Ежедневно 12:00–23:00",
@@ -79,8 +79,8 @@ export const venues: Venue[] = [
     name: "Диканька Вареничная",
     category: "restaurant",
     cuisine: "Кафе · вареничная",
-    image: img(37616043),
-    gallery: [img(37616043), img(6680788), img(6680787)],
+    image: photoUrl("dikanka-varenichnaya-1.webp"),
+    gallery: [photoUrl("dikanka-varenichnaya-1.webp"), photoUrl("dikanka-varenichnaya-2.jpg"), photoUrl("dikanka-varenichnaya-3.jpg")],
     address: "ул. Герцена, 27",
     phone: "+7 3519 33-04-34",
     hours: "Ежедневно 10:00–22:00",
@@ -94,8 +94,8 @@ export const venues: Venue[] = [
     name: "Горький кофе",
     category: "coffee",
     cuisine: "Сеть кофеен",
-    image: img(37838325),
-    gallery: [img(37838325), img(302899), img(374885)],
+    image: photoUrl("gorky-1.webp"),
+    gallery: [photoUrl("gorky-1.webp"), photoUrl("gorky-2.jpg"), photoUrl("gorky-3.jpg")],
     address: "ул. Горького, 1",
     phone: "+7 3519 28-85-55",
     hours: "Ежедневно 08:00–22:00",
@@ -116,8 +116,8 @@ export const venues: Venue[] = [
     name: "Баден-Баден",
     category: "restaurant",
     cuisine: "Паб · немецко-австрийская кухня",
-    image: img(33880394),
-    gallery: [img(33880394), img(1283219), img(1089930)],
+    image: photoUrl("baden-baden-1.webp"),
+    gallery: [photoUrl("baden-baden-1.webp"), photoUrl("baden-baden-2.jpg"), photoUrl("baden-baden-3.jpg")],
     address: "ул. Горького, 1",
     phone: "+7 3519 23-08-08",
     hours: "Ежедневно 12:00–00:00",
@@ -131,8 +131,8 @@ export const venues: Venue[] = [
     name: "Мясобар",
     category: "bar",
     cuisine: "Бар · мясная кухня",
-    image: img(25457312),
-    gallery: [img(25457312), img(8112966), img(36683027)],
+    image: photoUrl("myasobar-1.webp"),
+    gallery: [photoUrl("myasobar-1.webp"), photoUrl("myasobar-2.jpg"), photoUrl("myasobar-3.jpg")],
     address: "пр-т Ленина, 71/1",
     phone: "+7 961 577-55-11",
     hours: "Ежедневно 16:00–02:00",
@@ -146,8 +146,8 @@ export const venues: Venue[] = [
     name: "Дальняя дача",
     category: "restaurant",
     cuisine: "Семейный ресторан",
-    image: img(15446246),
-    gallery: [img(15446246), img(941861), img(30420679)],
+    image: photoUrl("dalnyaya-dacha-1.jpg"),
+    gallery: [photoUrl("dalnyaya-dacha-1.jpg"), photoUrl("dalnyaya-dacha-2.jpg"), photoUrl("dalnyaya-dacha-3.jpg")],
     address: "Парк Притяжение, прокат № 2, 2 этаж",
     phone: "+7 3519 58-68-78",
     hours: "Ежедневно 11:00–22:00",
@@ -162,8 +162,8 @@ export const cateringContent = {
   title: "Кейтеринг",
   lead: "Мы превращаем каждое мероприятие в событие. Кулинарное мастерство холдинга и сервис — у вас, в любом формате.",
   since: "URALRESTAURANT TEAM · с 2019 года",
-  image: img(35247187, 1800, 900),
-  gallery: [img(35247187, 1200, 800), img(34307854, 1200, 800), img(39866692, 1200, 800)],
+  image: photoUrl("catering-1.jpg"),
+  gallery: [photoUrl("catering-1.jpg"), photoUrl("catering-2.jpg"), photoUrl("catering-3.jpg")],
   formats: ["Фуршет", "Банкет", "Корпоратив", "Свадьба", "Кофе-брейк"],
   features: [
     {
@@ -215,7 +215,7 @@ export const aboutIntro = {
   titleBottom: "встречаем гостей.",
   lead: "Холдинг берёт своё начало с 1998 года. Уже больше 25 лет мы радуем гостей вкуснейшими блюдами из наших заведений.",
   text: "Мы гордимся тем, что гости ценят наши вкусы и кулинарное мастерство. Наш холдинг — место, где каждый может получить отличный кулинарный опыт и отдохнуть в уютной атмосфере: от романтического ужина до корпоративного вечера.",
-  image: img(30420679, 1600, 1100),
+  image: photoUrl("about-intro.jpg"),
 };
 
 export const aboutTimeline: TimelineEvent[] = [
@@ -224,7 +224,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Паб",
     title: "Баден-Баден",
     text: "Всё началось с паба в атмосфере старой доброй Европы: роскошные дубовые панели, занятные вещицы из Германии и Чехии, внимательный персонал и главная гордость — уникальная коллекция раритетных сортов пива.",
-    image: img(33880394),
+    image: photoUrl("baden-baden-1.webp"),
     venueId: "baden-baden",
   },
   {
@@ -232,7 +232,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Флагман",
     title: "Диканька",
     text: "Концептуальная кухня и большие хуторские порции. Идеальное сочетание цены и качества — ресторан на каждый день и флагманский ресторан холдинга.",
-    image: img(29109688),
+    image: photoUrl("dikanka-1.jpg"),
     venueId: "dikanka",
   },
   {
@@ -240,7 +240,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Кофейня",
     title: "Горький кофе",
     text: "Уникальная атмосфера, часть современного городского стиля жизни. Место, где люди встречаются и заряжаются новыми впечатлениями.",
-    image: img(37838325),
+    image: photoUrl("gorky-1.webp"),
     venueId: "gorky",
   },
   {
@@ -248,7 +248,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Стейк-хаус",
     title: "El Primo",
     text: "«Место, где всё вращается вокруг стейка». Создан для ценителей мраморной говядины: блюда готовятся при 330 °C в печи Josper — гриль на живых берёзовых углях и печь в одном изделии.",
-    image: img(10692502),
+    image: photoUrl("el-primo-1.webp"),
     venueId: "el-primo",
   },
   {
@@ -256,7 +256,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Восточная кухня",
     title: "Тандыр-Паша",
     text: "Блюда восточной, узбекской и грузинской кухни, приготовленные в тандыре. Щедрый стол, специи и настоящий вкус Кавказа и Средней Азии.",
-    image: img(17478663),
+    image: photoUrl("tandyr-1.webp"),
     venueId: "tandyr",
   },
   {
@@ -264,14 +264,14 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Выездной сервис",
     title: "Кейтеринг URALRESTAURANT TEAM",
     text: "Проведение выездных мероприятий любой сложности и формата — от фуршета до полноценного банкета с высоким уровнем сервиса.",
-    image: img(35247187, 1600, 1100),
+    image: photoUrl("catering-1.jpg"),
   },
   {
     year: "2020",
     tag: "Specialty",
     title: "Горький кофе Specialty",
     text: "Кофе категории specialty, завтраки весь день и альтернативные способы заваривания — для настоящих ценителей кофейных напитков.",
-    image: img(302899),
+    image: photoUrl("gorky-2.jpg"),
     venueId: "gorky",
   },
   {
@@ -279,7 +279,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "8 мест",
     title: "Холдинг сегодня",
     text: "К нам добавились кафе «Диканька Вареничная», бар «Мясобар» и семейный ресторан «Дальняя дача» в парке Притяжение. Мы продолжаем расти — и радовать вас новыми вкусовыми открытиями.",
-    image: img(15446246),
+    image: photoUrl("dalnyaya-dacha-1.jpg"),
     venueId: "dalnyaya-dacha",
   },
 ];
