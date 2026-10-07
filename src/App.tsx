@@ -989,7 +989,7 @@ export default function App() {
               <ArrowUpRight />
             </button>
 
-            <div className="hero-stage">
+            <div className="hero-stage hero-stage-clean">
               <HeroMedia
                 image={heroCreative.image}
                 alt={heroCreative.alt}
@@ -998,17 +998,7 @@ export default function App() {
                 priority
               />
               <div className="hero-content">
-                <p className="eyebrow hero-eyebrow">Магнитогорск · места для встреч</p>
-                <h1 className="hero-title">
-                  <span className="hero-title-main">
-                    <span>Урал</span>
-                    <span>Ресторан</span>
-                  </span>
-                  <span className="hero-title-group">Групп</span>
-                </h1>
-                <p className="hero-description">
-                  Разные кухни и настроения. Один город, который встречается за столом.
-                </p>
+                <h1 className="visually-hidden">УралРесторан Групп — рестораны, кофейни и бары Магнитогорска</h1>
                 <div className="hero-actions">
                   <button className="button-light" type="button" onClick={() => goHome("restaurants")}>
                     Выбрать ресторан <ArrowUpRight />
@@ -1070,7 +1060,14 @@ export default function App() {
                 </div>
               </section>
 
-              <section className="block block-loyalty reveal" id="loyalty">
+              <section className="block block-loyalty block-loyalty-photo reveal" id="loyalty">
+                <img
+                  className="block-photo"
+                  src={photoUrl("loyalty-card.jpg")}
+                  alt="Карта лояльности УралРесторан Групп"
+                  onError={onPhotoError}
+                />
+                <div className="block-shade block-shade-light" />
                 <div className="block-content block-content-dark">
                   <p className="eyebrow block-eyebrow">Программа лояльности</p>
                   <h2>
@@ -1079,12 +1076,9 @@ export default function App() {
                     возвращаться.
                   </h2>
                   <p>Накопительная скидка, привилегии гостя и подарочные сертификаты заведений группы.</p>
-                  <button className="button-light" type="button" onClick={() => openDialog("loyalty")}>
+                  <button className="button-dark" type="button" onClick={() => openDialog("loyalty")}>
                     Узнать подробнее <ArrowUpRight />
                   </button>
-                </div>
-                <div className="block-visual">
-                  <LoyaltyCard />
                 </div>
               </section>
 
