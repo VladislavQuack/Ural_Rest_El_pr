@@ -1067,8 +1067,7 @@ export default function App() {
                   alt="Карта лояльности УралРесторан Групп"
                   onError={onPhotoError}
                 />
-                <div className="block-shade block-shade-light" />
-                <div className="block-content block-content-dark">
+                          <div className="block-content block-content-dark">
                   <p className="eyebrow block-eyebrow">Программа лояльности</p>
                   <h2>
                     Приятно
@@ -1283,7 +1282,7 @@ export default function App() {
                   </div>
                   <div className="value-card reveal">
                     <span>02</span>
-                    <h3>Сервис как забота</h3>
+                    <h3>Сервис к��к забота</h3>
                     <p>Внимательный персонал, уютные залы и атмосфера, в которой одинаково хорошо и будним вечером, и в праздник.</p>
                   </div>
                   <div className="value-card reveal">
