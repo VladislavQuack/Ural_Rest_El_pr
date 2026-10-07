@@ -378,6 +378,16 @@ svg {
   content: none;
 }
 
+/* Without the darkening overlay the secondary action needs its own chip
+   to stay readable over bright parts of the creative. */
+.hero-stage-clean .hero-text-link {
+  min-height: 50px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: rgba(13, 13, 12, 0.55);
+  backdrop-filter: blur(8px);
+}
+
 .hero-content {
   position: relative;
   width: min(100%, 1100px);

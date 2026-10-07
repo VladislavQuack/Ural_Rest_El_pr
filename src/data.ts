@@ -95,7 +95,7 @@ export const venues: Venue[] = [
     category: "coffee",
     cuisine: "Сеть кофеен",
     image: photoUrl("gorky-1.webp"),
-    gallery: [photoUrl("gorky-1.webp"), photoUrl("gorky-2.jpg"), photoUrl("gorky-3.jpg")],
+    gallery: [photoUrl("gorky-1.webp"), photoUrl("gorky-2.webp"), photoUrl("gorky-3.jpg")],
     address: "ул. Горького, 1",
     phone: "+7 3519 28-85-55",
     hours: "Ежедневно 08:00–22:00",
@@ -271,7 +271,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "Specialty",
     title: "Горький кофе Specialty",
     text: "Кофе категории specialty, завтраки весь день и альтернативные способы заваривания — для настоящих ценителей кофейных напитков.",
-    image: photoUrl("gorky-2.jpg"),
+    image: photoUrl("gorky-2.webp"),
     venueId: "gorky",
   },
   {
@@ -279,7 +279,7 @@ export const aboutTimeline: TimelineEvent[] = [
     tag: "8 мест",
     title: "Холдинг сегодня",
     text: "К нам добавились кафе «Диканька Вареничная», бар «Мясобар» и семейный ресторан «Дальняя дача» в парке Притяжение. Мы продолжаем расти — и радовать вас новыми вкусовыми открытиями.",
-    image: photoUrl("dalnyaya-dacha-1.jpg"),
+    image: photoUrl("holding-today.png"),
     venueId: "dalnyaya-dacha",
   },
 ];
